@@ -1,3 +1,4 @@
+#settings.py
 import os
 from pathlib import Path
 
@@ -15,10 +16,11 @@ SECRET_KEY = os.environ.get(
 )
 
 # En producción esto debe ser False; True solo para desarrollo
-DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
+DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1 localhost").split()
-
+ALLOWED_HOSTS = ["*"]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ─────────────────────────────────────────────────────────────
 # APLICACIONES
 # ─────────────────────────────────────────────────────────────
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
