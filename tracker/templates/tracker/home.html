@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP Tracker — Estilo Pastel & Gatos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- Fuentes: Luckiest Guy para el título, Syne para texto, JetBrains Mono para código -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&family=Luckiest+Guy&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Paleta pastel viva */
+      --bg: #f9f5ff;          /* Fondo lavanda suave */
+      --surface: #ffffff;      /* Blanco para tarjetas */
+      --border: #e9e6f8;       /* Borde lavanda suave */
+      --accent: #7bdff6;       /* Celeste pastel */
+      --accent2: #ffd3e0;      /* Rosa pastel */
+      --accent3: #b6e7c3;      /* Menta suave */
+      --text: #2b2b2b;
+      --muted: #6b7280;
+      --shadow: 0 10px 25px rgba(0,0,0,.05);
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Syne', sans-serif;
+      --title-font: 'Luckiest Guy', cursive, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 60px;
+    }
+
+    header {
+      width: 100%;
+      max-width: 920px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #2b6cb0;
+      background: #e6f3ff;
+      border: 1px solid #b8f0e0;
+      border-radius: 999px;
+      padding: 6px 12px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 9vw, 68px);
+      font-family: var(--title-font);
+      line-height: 1.05;
+      margin: 6px 0 6px;
+      color: #6b5bd3;
+      text-shadow: 1px 1px 2px rgba(0,0,0,.08);
+      letter-spacing: -0.02em;
+    }
+
+    /* Subtítulo */
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Aviso ético suave */
+    .aviso {
+      width: 100%;
+      max-width: 920px;
+      background: linear-gradient(135deg, rgba(219, 179, 217, 0.4), rgba(184, 238, 208, 0.4));
+      border: 1px solid rgba(219, 179, 217, 0.7);
+      color: #374151;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin: 18px auto;
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* GATO EN MEDIO */
+    .cat-stage {
+      width: 100%;
+      max-width: 920px;
+      display: grid;
+      place-items: center;
+      padding: 8px 0 12px;
+      margin-bottom: 6px;
+    }
+    .cat-gif {
+      width: min(64vw, 520px);
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.08);
+      border: 4px solid rgba(255,255,255,.95);
+      background: #fff;
+      display: block;
+    }
+    .cat-caption {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* IP principal – pastel suave */
+    .ip-hero {
+      width: 100%;
+      max-width: 920px;
+      background: #ffffff;
+      border: 2px solid var(--accent3);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 8px 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+
+    .ip-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 6px;
+    }
+
+    .ip-value {
+      font-family: var(--mono);
+      font-size: clamp(22px, 6vw, 40px);
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: .02em;
+    }
+
+    .ip-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+      font-family: var(--mono);
+    }
+
+    .location-pill {
+      background: var(--accent2);
+      border: 1px solid rgba(255, 210, 210, 0.9);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #b60063;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Grid de datos (pastel) */
+    .grid {
+      width: 100%;
+      max-width: 920px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 8px 0 12px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .card-icon { font-size: 20px; margin-bottom: 6px; }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 6px;
+    }
+
+    .card-value { font-size: 14px; font-weight: 700; color: #374151; }
+
+    /* User Agent */
+    .ua-card {
+      width: 100%;
+      max-width: 920px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin: 6px 0 6px;
+      font-family: var(--mono);
+      color: #374151;
+    }
+
+    .ua-value {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    /* Explicación técnica (opcional) */
+    .explicacion {
+      width: 100%;
+      max-width: 920px;
+      background: #fff8fb;
+      border: 1px solid #f0d6e6;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+    }
+
+    .explicacion h2 {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #6d28d9;
+    }
+
+    .step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+    .step:last-child { margin-bottom: 0; }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #6b21a8;
+      background: #f0e6ff;
+      border: 1px solid #d6b7ff;
+      border-radius: 6px;
+      padding: 6px 9px;
+      white-space: nowrap;
+    }
+
+    .step-content h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .step-content p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border: 1px solid #e5e7eb;
+    }
+
+    footer {
+      margin-top: 28px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Responsividad adicional */
+    @media (max-width: 768px) {
+      .ip-hero { padding: 16px; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">Proyecto académico · Ciberseguridad</div>
+    <h1>Ya te hackie w, 👀</h1>
+    <p class="subtitle">
+      Demostración de cómo los servidores web capturan y geolocalizan la dirección IP de sus visitantes.
+      Todo lo que ves proviene de tu conexión, ahora en colores suaves.
+    </p>
+  </header>
+
+  <!-- Aviso ético suave -->
+  <div class="aviso" aria-label="Aviso de privacidad pastel">
+    <strong>Aviso:</strong> Esta página registra tu dirección IP y datos de red con fines académicos.
+    La geolocalización es aproximada y no revela tu domicilio exacto. Todo en un marco ético y consciente.
+  </div>
+
+  <!-- GATO EN MEDIO -->
+  <section class="cat-stage" aria-label="Gato central">
+    <img class="cat-gif" src="https://i.pinimg.com/originals/fd/30/84/fd30846b19ff684f079d23b217a481e8.gif" alt="Gato curioso en el centro" />
+    <div class="cat-caption">Este gatito observa tus datos con ojos de hackers (solo educativo).</div>
+  </section>
+
+  <!-- IP principal -->
+  <section class="ip-hero" aria-label="IP principal pastel">
+    <div>
+      <div class="ip-label">Tu IP pública detectada</div>
+      <div class="ip-value">{{ ip }}</div>
+      <div class="ip-note">Capturada del encabezado HTTP de tu solicitud</div>
+    </div>
+    {% if ciudad and ciudad != "No disponible" %}
+    <div class="location-pill">📍 {{ ciudad }}, {{ pais }}</div>
+    {% endif %}
+  </section>
+
+  <!-- Datos geográficos -->
+  <section class="grid" aria-label="Datos geográficos pastel">
+    <div class="card" role="listitem">
+      <div class="card-icon">🌍</div>
+      <div class="card-label">País</div>
+      <div class="card-value">{{ pais }}</div>
+    </div>
+    <div class="card" role="listitem">
+      <div class="card-icon">🗺️</div>
+      <div class="card-label">Región</div>
+      <div class="card-value">{{ region }}</div>
+    </div>
+    <div class="card" role="listitem">
+      <div class="card-icon">🏙️</div>
+      <div class="card-label">Ciudad</div>
+      <div class="card-value">{{ ciudad }}</div>
+    </div>
+    <div class="card" role="listitem">
+      <div class="card-icon">🏢</div>
+      <div class="card-label">ISP / Proveedor</div>
+      <div class="card-value">{{ isp }}</div>
+    </div>
+    {% if latitud %}
+    <div class="card" role="listitem">
+      <div class="card-icon">📐</div>
+      <div class="card-label">Coordenadas (aprox.)</div>
+      <div class="card-value">{{ latitud }}, {{ longitud }}</div>
+    </div>
+    {% endif %}
+    <div class="card" role="listitem">
+      <div class="card-icon">⏰</div>
+      <div class="card-label">Fecha (UTC)</div>
+      <div class="card-value">{{ fecha|date:"d/m/Y H:i:s" }}</div>
+    </div>
+  </section>
+
+  <!-- User-Agent -->
+  <section class="ua-card" aria-label="User-Agent pastel">
+    <div style="font-family: var(--mono); font-weight:700; color:#374151; margin-bottom:6px;">User-Agent</div>
+    <div class="ua-value">{{ user_agent }}</div>
+  </section>
+
+  <!-- Explicación técnica (opcional) -->
+  <section class="explicacion" aria-label="Explicación técnica pastel">
+    <h2>⚙️ Cómo funciona este tracker (versión pastel)</h2>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Captura de IP</h3>
+        <p>Leemos <code>HTTP_X_FORWARDED_FOR</code> o <code>REMOTE_ADDR</code> para obtener la IP real del visitante.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Geolocalización</h3>
+        <p>Se consulta ip-api.com (o servicio similar) para obtener país/ciudad aproximados y ISP.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Persistencia</h3>
+        <p>Los datos se guardan en la base de datos definida (SQLite para desarrollo, PostgreSQL recomendado en producción).</p>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    Proyecto académico · Ciberseguridad — estilo pastel con gato
+  </footer>
+
+</body>
+</html>
