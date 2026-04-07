@@ -1,3 +1,4 @@
+#views.py
 import requests
 import logging
 from django.shortcuts import render
@@ -31,8 +32,8 @@ def geolocalizacion(ip):
     """
     try:
         respuesta = requests.get(
-            f"https://ip-api.com/json/{ip}",
-            timeout=5  # Evitar que el servidor quede bloqueado esperando
+            f"http://ip-api.com/json/{ip}",  # HTTP, no HTTPS (requerido en plan gratuito)
+            timeout=5
         )
         respuesta.raise_for_status()
         return respuesta.json()
